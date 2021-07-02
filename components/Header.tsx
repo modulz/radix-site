@@ -55,7 +55,7 @@ export const Header = (props) => {
               <RadixLogo label="Radix Homepage" />
             </Box>
           </NextLink>
-          <Flex align="center" css={{ ml: '$3' }}>
+          <Flex css={{ ml: '$3', alignItems: 'center' }}>
             {isPrimitives && (
               <>
                 <Text size="2">Primitives</Text>
@@ -70,13 +70,13 @@ export const Header = (props) => {
               </>
             )}
           </Flex>
-          <Flex gap="6" align="center" css={{ ml: 'auto' }}>
+          <Flex css={{ ml: 'auto', gap: '$4', alignItems: 'center' }}>
             <DropdownMenu>
               <DropdownMenuTrigger
                 as={Button}
                 size="2"
                 ghost
-                css={{ gap: '$1', fontWeight: 400, color: '$slate11' }}
+                css={{ gap: '$1', fontWeight: 400, color: '$slate11', mr: '-$2' }}
               >
                 Product
                 <PlusIcon />
@@ -94,7 +94,13 @@ export const Header = (props) => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <Separator orientation="vertical" css={{ ml: '-$5', mr: '-$3' }} />
+            <Separator orientation="vertical" />
+            <NextLink href="/blog" passHref>
+              <Link variant="subtle" css={{ fontSize: '$3' }}>
+                Blog
+              </Link>
+            </NextLink>
+            <Separator orientation="vertical" />
             <ThemeToggle />
           </Flex>
         </Flex>

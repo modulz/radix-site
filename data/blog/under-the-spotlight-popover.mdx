@@ -1,0 +1,107 @@
+---
+metaTitle: 'Under the spotlight: Popover'
+metaDescription: 'A closer look at the features of the Popover component.'
+publishedAt: '2021-05-13'
+author: 'pedro'
+---
+
+A Popover component is an overlay containing rich content. It's positioned relatively to interactive trigger element. It appears when the trigger is clicked.
+
+At a glance, building a custom Popover may seem trivial. But there are many cases to consider. Such as accessibility concerns, collision-aware positioning and focus trapping. Because of this complexity, custom-built Popovers components leave a lot to be desired.
+
+This article highlights how we overcame the challenges presented when building a world-class Popover component.
+
+---
+
+## A closer look
+
+Our goal is to ensure the Popover component is accessible while providing the best possible developer and user experiences.
+
+Below is a list of all the features we've built into our Popover, they all work out of the box.
+
+### Screen reader
+
+Our Popover component follows the [WAI-ARIA](https://www.w3.org/TR/wai-aria-practices-1.2/#dialog_modal) authoring specification. This ensures it's accessible to screen reader users.
+
+For example, the Popover element has the `role="dialog"` and `aria-modal` attributes. The Popover trigger has the `aria-haspopup`, `aria-expanded` and `aria-controls` attributes.
+When the Popover is opened, all other elements are hidden from screen readers.
+
+<VideoPlaceholder />
+
+### Keyboard navigation
+
+Keyboard navigation helps users with motor disabilities navigate across the items in the Accordion. Blind users rely on keyboard for navigation. It also improves the experience for people without disabilities.
+
+Every Radix Primitive supports keyboard accessibility. So you can do anything you need without using your mouse.
+
+<KeyboardTable
+  data={[
+    {
+      keys: ['Space'],
+      description: 'Opens/closes the popover.',
+    },
+    {
+      keys: ['Enter'],
+      description: 'Opens/closes the popover.',
+    },
+    {
+      keys: ['Tab'],
+      description: 'Moves focus to the next focusable element',
+    },
+    {
+      keys: ['Shift + Tab'],
+      description: 'Moves focus to the previous focusable element',
+    },
+    {
+      keys: ['Esc'],
+      description:
+        'Closes the popover and moves focus to Popover Trigger',
+    },
+  ]}
+/>
+
+<VideoPlaceholder />
+
+### Positioning
+
+You can configure the Popover so it appears on above or below the trigger, as well as to the left or right of it. You can also choose the alignment of the Popover against the trigger.
+
+When you open the Popover, it'll be positioned relatively to the trigger element. In the unlikely scenario where there's not enough space (a collision), the position will be adjusted.
+
+For example, if you have configured the Popover to appear above the trigger, and there's not enough space to fully display the Popover, it'll appear below instead.
+
+<VideoPlaceholder />
+
+### Focus management
+
+The Popover comes with fully focus management out-of-the-box. When it opens, it'll automatically focus the first focusable element. When it closes, the focus will return to the trigger.
+
+The focus is also trapped within the Popover content. This means if you keep pressing <Kbd>Tab</Kbd> the focus will not leave its bounds.
+
+### Animation
+
+The ability add animation is essential. The Radix Popover has been built with animation support in mind. You can animate with CSS or with an animation library, such as Framer Motion.
+
+Our Popover component exposes its transform origin via a CSS Custom Property. This enables you to add origin-aware animation in an elegant manner.
+
+<VideoPlaceholder />
+
+### Nesting
+
+Some advanced interfaces, such as design tools, may require nesting of Popovers. The Radix Popover ensures you can customise its layering and dismissing behaviour.
+
+### Highly customizable
+
+You can configure many different behaviours, such as dismissing and layering, portal rendering, auto focus and collisions.
+
+### Styling
+
+Radix Tooltips ship with zero styles, so you have full control over the Tooltip's look and feel.
+
+---
+
+## Live demo
+
+One last thing. Here's an interactive, live demo of the Radix Popover. Feel free to play around!
+
+<PopoverDemo />

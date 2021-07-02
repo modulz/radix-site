@@ -52,7 +52,7 @@ export default function DesignSystemDoc({ frontmatter, code }: Doc) {
         className={RemoveScroll.classNames.zeroRight}
         css={{
           display: 'none',
-          '@bp3': {
+          '@media (min-width: 1440px)': {
             display: 'block',
             width: 250,
             flexShrink: 0,

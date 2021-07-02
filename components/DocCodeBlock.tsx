@@ -8,6 +8,8 @@ export function DocCodeBlock({
   id,
   showLineNumbers = false,
   collapsed = false,
+  scrollable = false,
+  variant,
 }) {
   const [isCollapsed, setIsCollapsed] = React.useState(collapsed);
 
@@ -31,9 +33,11 @@ export function DocCodeBlock({
       )}
       <Pre
         as="pre"
+        variant={variant}
         css={{
           my: '$5',
           ...(isCollapsed ? { display: 'none' } : {}),
+          ...(scrollable ? { maxHeight: 600, overflow: 'auto' } : {}),
           '[data-preview] + &, [data-code-toggle] + &': {
             marginTop: 1,
             borderTopLeftRadius: 0,

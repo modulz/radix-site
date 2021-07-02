@@ -9,6 +9,12 @@
       "options": {
         "printWidth": 70
       }
+    },
+    {
+      "files": "data/**/*.mdx",
+      "options": {
+        "printWidth": 70
+      }
     }
   ]
 }

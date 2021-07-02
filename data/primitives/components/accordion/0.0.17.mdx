@@ -30,99 +30,58 @@ Install the component from your command line.
 npm install @radix-ui/react-accordion
 ```
 
+## Import
+
+You can import all the parts at once.
+
+```jsx
+import * as Accordion from '@radix-ui/react-accordion';
+```
+
 ## Anatomy
 
 Import the components and piece the parts together.
 
-```jsx
-import * as Accordion from '@radix-ui/react-accordion';
-
-export default () => (
-  <Accordion.Root>
-    <Accordion.Item>
-      <Accordion.Header>
-        <Accordion.Trigger />
-      </Accordion.Header>
-      <Accordion.Content />
-    </Accordion.Item>
-  </Accordion.Root>
-);
+```html
+<Accordion.Root>
+  <Accordion.Item>
+    <Accordion.Header>
+      <Accordion.Trigger />
+    </Accordion.Header>
+    <Accordion.Content />
+  </Accordion.Item>
+</Accordion.Root>
 ```
 
 ## Basic example
 
 Create your styled accordion component from the primitive parts.
 
-<Preview>
-  <AccordionDemo defaultValue="item-1" />
-</Preview>
-
 ```jsx
-import { styled } from 'path-to/stitches.config';
 import * as Accordion from '@radix-ui/react-accordion';
 
-const StyledAccordion = styled(Accordion.Root, {
-  borderTop: '1px solid gainsboro',
-});
-
-const StyledItem = styled(Accordion.Item, {
-  borderBottom: '1px solid gainsboro',
-});
-
-const StyledHeader = styled(Accordion.Header, {
-  margin: 0,
-  display: 'flex',
-});
-
-const StyledTrigger = styled(Accordion.Trigger, {
-  backgroundColor: 'transparent',
-  border: 'none',
-  padding: 10,
-  flex: 1,
-  textAlign: 'left',
-});
-
-const StyledContent = styled(Accordion.Content, {
-  padding: 10,
-});
-
 export default () => (
-  <StyledAccordion type="single" defaultValue="item-1">
-    <StyledItem value="item-1">
-      <StyledHeader>
-        <StyledTrigger>Item 1</StyledTrigger>
-      </StyledHeader>
-      <StyledContent>
+  <Accordion.Root type="single" defaultValue="item-1">
+    <Accordion.Item value="item-1">
+      <Accordion.Header>
+        <Accordion.Trigger>Item 1</Accordion.Trigger>
+      </Accordion.Header>
+      <Accordion.Content>
         Here goes the content for the accordion item 1.
-      </StyledContent>
-    </StyledItem>
+      </Accordion.Content>
+    </Accordion.Item>
 
-    <StyledItem value="item-2">
-      <StyledHeader>
-        <StyledTrigger>Item 2</StyledTrigger>
-      </StyledHeader>
-      <StyledContent>
+    <Accordion.Item value="item-2">
+      <Accordion.Header>
+        <Accordion.Trigger>Item 2</Accordion.Trigger>
+      </Accordion.Header>
+      <Accordion.Content>
         Here goes the content for the accordion item 2.
-      </StyledContent>
-    </StyledItem>
-
-    <StyledItem value="item-3">
-      <StyledHeader>
-        <StyledTrigger>Item 3</StyledTrigger>
-      </StyledHeader>
-      <StyledContent>
-        Here goes the content for the accordion item 3.
-      </StyledContent>
-    </StyledItem>
-  </StyledAccordion>
+      </Accordion.Content>
+    </Accordion.Item>
+  </Accordion.Root>
 );
 ```
-
-<Note>
-
-**Note:** This example uses [Stitches](https://stitches.dev) but any styling solution is [compatible](/primitives/docs/overview/styling).
-
-</Note>
 
 ## API Reference
 
@@ -344,333 +303,134 @@ Contains the collapsible content for an item.
 
 ## Styling
 
-### Animating content height
+### With CSS-in-JS
 
-We expose a CSS custom property `--radix-accordion-content-height`.<br />Use it to animate the height of the content when it opens/closes.
+This example uses [Stitches](https://stitches.dev) but any styling solution is [compatible](/primitives/docs/overview/styling).
 
 ```jsx
-const slideDown = keyframes({
+import { styled } from '@stitches/react';
+import * as Accordion from '@radix-ui/react-accordion';
+
+const StyledAccordion = styled(Accordion.Root, {});
+const StyledItem = styled(Accordion.Item, {});
+const StyledHeader = styled(Accordion.Header, {});
+const StyledTrigger = styled(Accordion.Trigger, {});
+const StyledPanel = styled(Accordion.Content, {});
+
+export default () => {
+  return (
+    <StyledAccordion type="single">
+      <StyledItem value="item-1">
+        <StyledHeader>
+          <StyledTrigger>Trigger text</StyledTrigger>
+        </StyledHeader>
+        <StyledPanel>Panel content</StyledPanel>
+      </StyledItem>
+    </StyledAccordion>
+  );
+};
+```
+
+### With CSS
+
+The CSS is in a comment for brevity, but you can use any solution, such as CSS Modules, Sass, or vanilla CSS.
+
+```jsx
+/* 
+.accordion {}
+.accordion-item {}
+.accordion-header {}
+.accordion-trigger {}
+.accordion-content {}
+*/
+
+import * as Accordion from '@radix-ui/react-accordion';
+
+export default () => {
+  return (
+    <Accordion.Root className="accordion" type="single">
+      <Accordion.Item className="accordion-item" value="item-1">
+        <Accordion.Header className="accordion-header">
+          <Accordion.Trigger className="accordion-trigger">
+            Trigger
+          </Accordion.Trigger>
+        </Accordion.Header>
+        <Accordion.Content className="accordion-content">
+          Content
+        </Accordion.Panel>
+      </Accordion.Item>
+    </Accordion.Root>
+  );
+};
+```
+
+### Animating content height
+
+You can use the `--radix-accordion-content-height` CSS variable to animate the height of the content when it opens/closes. Here's a demo using Stitches:
+
+```jsx
+import { styled, keyframes } from '@stitches/react';
+import * as Accordion from '@radix-ui/react-accordion';
+
+const open = keyframes({
   from: { height: 0 },
   to: { height: 'var(--radix-accordion-content-height)' },
 });
 
-const slideUp = keyframes({
+const close = keyframes({
   from: { height: 'var(--radix-accordion-content-height)' },
   to: { height: 0 },
 });
 
 const StyledContent = styled(Accordion.Content, {
-  '&[data-state="open"]': {
-    animation: `${slideDown} 300ms ease-out`,
-  },
-  '&[data-state="closed"]': {
-    animation: `${slideUp} 300ms ease-out`,
-  },
+  '&[data-state="open"]': { animation: `${open} 300ms ease-out` },
+  '&[data-state="closed"]': { animation: `${close} 300ms ease-out` },
 });
 ```
 
 ## Examples
 
-### With chevrons
-
-<Preview>
-  <AccordionDemo showChevrons defaultValue="item-1" />
-</Preview>
-
-```jsx collapsed
-import { styled } from 'path-to/stitches.config';
-import * as Accordion from '@radix-ui/react-accordion';
-import { ChevronDownIcon } from '@radix-ui/react-icons';
-
-const StyledAccordion = styled(Accordion.Root, {
-  borderTop: '1px solid gainsboro',
-});
-
-const StyledItem = styled(Accordion.Item, {
-  borderBottom: '1px solid gainsboro',
-});
-
-const StyledHeader = styled(Accordion.Header, {
-  margin: 0,
-  display: 'flex',
-});
-
-const StyledTrigger = styled(Accordion.Trigger, {
-  backgroundColor: 'transparent',
-  border: 'none',
-  padding: 10,
-  flex: 1,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-});
-
-const StyledContent = styled(Accordion.Content, {
-  padding: 10,
-});
-
-const AccordionChevron = styled(ChevronDownIcon, {
-  transition: 'transform 300ms',
-
-  '[data-state=open] &': {
-    transform: 'rotate(180deg)',
-  },
-});
-
-export default () => (
-  <StyledAccordion type="single" defaultValue="item-1">
-    <StyledItem value="item-1">
-      <StyledHeader>
-        <StyledTrigger>
-          Item 1
-          <AccordionChevron aria-hidden />
-        </StyledTrigger>
-      </StyledHeader>
-      <StyledContent>
-        Here goes the content for the accordion item 1.
-      </StyledContent>
-    </StyledItem>
-
-    <StyledItem value="item-2">
-      <StyledHeader>
-        <StyledTrigger>
-          Item 2
-          <AccordionChevron aria-hidden />
-        </StyledTrigger>
-      </StyledHeader>
-      <StyledContent>
-        Here goes the content for the accordion item 2.
-      </StyledContent>
-    </StyledItem>
-
-    <StyledItem value="item-3">
-      <StyledHeader>
-        <StyledTrigger>
-          Item 3
-          <AccordionChevron aria-hidden />
-        </StyledTrigger>
-      </StyledHeader>
-      <StyledContent>
-        Here goes the content for the accordion item 3.
-      </StyledContent>
-    </StyledItem>
-  </StyledAccordion>
-);
-```
-
 ### Expanded by default
 
-<Preview>
-  <AccordionDemo defaultValue="item-2" />
-</Preview>
+Use the `defaultValue` prop to define the open item by default.
 
-```jsx collapsed
-import { styled } from 'path-to/stitches.config';
-import * as Accordion from '@radix-ui/react-accordion';
-import { ChevronDownIcon } from '@radix-ui/react-icons';
-
-// prettier-ignore
-const StyledAccordion = styled(Accordion.Root, { /* styles */ });
-
-const StyledItem = styled(Accordion.Item, {
-  // sry
-});
-
-const StyledHeader = styled(Accordion.Header, {
-  margin: 0,
-  display: 'flex',
-});
-
-const StyledTrigger = styled(Accordion.Trigger, {
-  backgroundColor: 'transparent',
-  border: 'none',
-  padding: 10,
-  flex: 1,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-});
-
-const StyledContent = styled(Accordion.Content, {
-  padding: 10,
-});
-
-const AccordionChevron = styled(ChevronDownIcon, {
-  transition: 'transform 300ms',
-
-  '[data-state=open] &': {
-    transform: 'rotate(180deg)',
-  },
-});
-
-export default () => (
-  <StyledAccordion type="single" defaultValue="item-2">
-    <StyledItem value="item-1">
-      <StyledHeader>
-        <StyledTrigger>
-          Item 1
-          <AccordionChevron aria-hidden />
-        </StyledTrigger>
-      </StyledHeader>
-      <StyledContent>
-        Here goes the content for the accordion item 1.
-      </StyledContent>
-    </StyledItem>
-
-    <StyledItem value="item-2">
-      <StyledHeader>
-        <StyledTrigger>
-          Item 2
-          <AccordionChevron aria-hidden />
-        </StyledTrigger>
-      </StyledHeader>
-      <StyledContent>
-        Here goes the content for the accordion item 2.
-      </StyledContent>
-    </StyledItem>
-
-    <StyledItem value="item-3">
-      <StyledHeader>
-        <StyledTrigger>
-          Item 3
-          <AccordionChevron aria-hidden />
-        </StyledTrigger>
-      </StyledHeader>
-      <StyledContent>
-        Here goes the content for the accordion item 3.
-      </StyledContent>
-    </StyledItem>
-  </StyledAccordion>
-);
+```jsx line=1,4
+<Accordion.Root type="single" __defaultValue__="item-2">
+  <Accordion.Item value="item-1">…</Accordion.Item>
+  <Accordion.Item value="item-2">…</Accordion.Item>
+</Accordion.Root>
 ```
 
 ### Allow collapsing all items
 
-<Preview>
-  <AccordionDemo collapsible defaultValue="item-1" />
-</Preview>
+Use the `collapsible` prop to allow all items to close.
 
-```jsx collapsed
-import { styled } from 'path-to/stitches.config';
-import * as Accordion from '@radix-ui/react-accordion';
-import { ChevronDownIcon } from '@radix-ui/react-icons';
-
-const StyledAccordion = styled(Accordion.Root, {
-  borderTop: '1px solid gainsboro',
-});
-
-const StyledItem = styled(Accordion.Item, {
-  borderBottom: '1px solid gainsboro',
-});
-
-const StyledHeader = styled(Accordion.Header, {
-  margin: 0,
-  display: 'flex',
-});
-
-const StyledTrigger = styled(Accordion.Trigger, {
-  backgroundColor: 'transparent',
-  border: 'none',
-  padding: 10,
-  flex: 1,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-});
-
-const StyledContent = styled(Accordion.Content, {
-  padding: 10,
-});
-
-const AccordionChevron = styled(ChevronDownIcon, {
-  transition: 'transform 300ms',
-
-  '[data-state=open] &': {
-    transform: 'rotate(180deg)',
-  },
-});
-
-export default () => (
-  <StyledAccordion type="single" defaultValue="item-1" collapsible>
-    <StyledItem value="item-1">
-      <StyledHeader>
-        <StyledTrigger>
-          Item 1
-          <AccordionChevron aria-hidden />
-        </StyledTrigger>
-      </StyledHeader>
-      <StyledContent>
-        Here goes the content for the accordion item 1.
-      </StyledContent>
-    </StyledItem>
-
-    <StyledItem value="item-2">
-      <StyledHeader>
-        <StyledTrigger>
-          Item 2
-          <AccordionChevron aria-hidden />
-        </StyledTrigger>
-      </StyledHeader>
-      <StyledContent>
-        Here goes the content for the accordion item 2.
-      </StyledContent>
-    </StyledItem>
-
-    <StyledItem value="item-3">
-      <StyledHeader>
-        <StyledTrigger>
-          Item 3
-          <AccordionChevron aria-hidden />
-        </StyledTrigger>
-      </StyledHeader>
-      <StyledContent>
-        Here goes the content for the accordion item 3.
-      </StyledContent>
-    </StyledItem>
-  </StyledAccordion>
-);
+```jsx line=1,4
+<Accordion.Root type="single" __collapsible__>
+  <Accordion.Item value="item-1">…</Accordion.Item>
+  <Accordion.Item value="item-2">…</Accordion.Item>
+</Accordion.Root>
 ```
 
 ### Multiple items open at the same time
 
-<Preview>
-  <AccordionDemo
-    type="multiple"
-    defaultValue={['item-2', 'item-3']}
-  />
-</Preview>
+Set the `type` prop to `multiple` to enable opening multiple items at once.
 
-```jsx collapsed
-import { styled } from 'path-to/stitches.config';
+```jsx line=1,4
+<Accordion.Root type="__multiple__">
+  <Accordion.Item value="item-1">…</Accordion.Item>
+  <Accordion.Item value="item-2">…</Accordion.Item>
+</Accordion.Root>
+```
+
+### Adding chevrons
+
+You can add extra decorative elements, such as chevrons.
+
+```jsx showLineNumbers line=3-11,13,18,24
+import { styled } from '@stitches/react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
-
-const StyledAccordion = styled(Accordion.Root, {
-  borderTop: '1px solid gainsboro',
-});
-
-const StyledItem = styled(Accordion.Item, {
-  borderBottom: '1px solid gainsboro',
-});
-
-const StyledHeader = styled(Accordion.Header, {
-  margin: 0,
-  display: 'flex',
-});
-
-const StyledTrigger = styled(Accordion.Trigger, {
-  backgroundColor: 'transparent',
-  border: 'none',
-  padding: 10,
-  flex: 1,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-});
-
-const StyledContent = styled(Accordion.Content, {
-  padding: 10,
-});
 
 const AccordionChevron = styled(ChevronDownIcon, {
   transition: 'transform 300ms',
@@ -681,44 +441,14 @@ const AccordionChevron = styled(ChevronDownIcon, {
 });
 
 export default () => (
-  <StyledAccordion
-    type="multiple"
-    defaultValue={['item-2', 'item-3']}
-  >
+  <StyledAccordion type="single">
     <StyledItem value="item-1">
       <StyledHeader>
         <StyledTrigger>
-          Item 1
-          <AccordionChevron aria-hidden />
+          Trigger text <AccordionChevron aria-hidden />
         </StyledTrigger>
       </StyledHeader>
-      <StyledContent>
-        Here goes the content for the accordion item 1.
-      </StyledContent>
-    </StyledItem>
-
-    <StyledItem value="item-2">
-      <StyledHeader>
-        <StyledTrigger>
-          Item 2
-          <AccordionChevron aria-hidden />
-        </StyledTrigger>
-      </StyledHeader>
-      <StyledContent>
-        Here goes the content for the accordion item 2.
-      </StyledContent>
-    </StyledItem>
-
-    <StyledItem value="item-3">
-      <StyledHeader>
-        <StyledTrigger>
-          Item 3
-          <AccordionChevron aria-hidden />
-        </StyledTrigger>
-      </StyledHeader>
-      <StyledContent>
-        Here goes the content for the accordion item 3.
-      </StyledContent>
+      <StyledPanel>Panel content</StyledPanel>
     </StyledItem>
   </StyledAccordion>
 );

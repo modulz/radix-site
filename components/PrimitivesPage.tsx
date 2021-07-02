@@ -122,7 +122,7 @@ export function PrimitivesPage({ children }: { children: React.ReactNode }) {
           py: '$5',
 
           '@bp2': { pt: '$8', pb: '$9', pl: '250px' },
-          '@bp3': { pr: '250px' },
+          '@media (min-width: 1440px)': { pr: '250px' },
         }}
       >
         <Container size="3" css={{ maxWidth: '780px', position: 'relative' }}>

@@ -17,8 +17,10 @@ export function Highlights({ features }) {
     <Flex
       css={{
         fd: 'column',
+        mt: '$4',
         '@bp1': {
           fd: 'row',
+          mt: '$7',
         },
       }}
     >

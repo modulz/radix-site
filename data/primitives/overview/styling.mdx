@@ -121,7 +121,7 @@ The examples below are using [Stitches](https://stitches.dev), but you can use a
 You can style a component part by wrapping it in a `styled` function (or equivalent).
 
 ```jsx
-import { styled } from 'path-to/stitches.config';
+import { styled } from '@stitches/react';
 import * as Accordion from '@radix-ui/react-accordion';
 
 const StyledItem = styled(Accordion.Item, {
@@ -138,7 +138,7 @@ const StyledPanel = styled(Accordion.Panel, {
 You can style a component state by targeting its `data-state` attribute.
 
 ```jsx
-import { styled } from 'path-to/stitches.config';
+import { styled } from '@stitches/react';
 import * as Accordion from '@radix-ui/react-accordion';
 
 const StyledItem = styled(Accordion.Item, {
@@ -154,78 +154,28 @@ const StyledItem = styled(Accordion.Item, {
 
 Here's an example of how you can style the [Accordion](../components/accordion) component with CSS-in-JS.
 
-<Preview>
-  <AccordionDemo />
-</Preview>
-
-```jsx collapsed
-import { styled } from 'path-to/stitches.config';
+```jsx
+import { styled } from '@stitches/react';
 import * as Accordion from '@radix-ui/react-accordion';
 
-const StyledAccordion = styled(Accordion.Root, {
-  borderTop: '1px solid hsl(210,15%,70%)',
-});
+const StyledAccordion = styled(Accordion.Root, {});
+const StyledItem = styled(Accordion.Item, {});
+const StyledHeader = styled(Accordion.Header, {});
+const StyledTrigger = styled(Accordion.Trigger, {});
+const StyledPanel = styled(Accordion.Content, {});
 
-const StyledItem = styled(Accordion.Item, {
-  borderBottom: '1px solid hsl(210,15%,70%)',
-});
-
-const StyledHeader = styled(Accordion.Header, {
-  margin: 0,
-  display: 'flex',
-});
-
-const StyledButton = styled(Accordion.Button, {
-  appearance: 'none',
-  border: 'none',
-  backgroundColor: 'transparent',
-  color: 'hsl(210,10%,48%)',
-  padding: '10px 15px',
-  flex: 1,
-  textAlign: 'left',
-
-  '&:focus': {
-    outline: 'none',
-    boxShadow:
-      '0 0 0 1px hsl(272,62%,44%), 0 0 0 3px hsl(272,100%,96%)',
-  },
-});
-
-const StyledPanel = styled(Accordion.Panel, {
-  padding: '10px 15px',
-  color: 'hsl(272,62%,44%)',
-});
-
-export default () => (
-  <StyledAccordion type="single">
-    <StyledItem value="item-1">
-      <StyledHeader>
-        <StyledButton>Item 1</StyledButton>
-      </StyledHeader>
-      <StyledPanel>
-        Here goes the content for the accordion item 1.
-      </StyledPanel>
-    </StyledItem>
-
-    <StyledItem value="item-2">
-      <StyledHeader>
-        <StyledButton>Item 2</StyledButton>
-      </StyledHeader>
-      <StyledPanel>
-        Here goes the content for the accordion item 2.
-      </StyledPanel>
-    </StyledItem>
-
-    <StyledItem value="item-3">
-      <StyledHeader>
-        <StyledButton>Item 3</StyledButton>
-      </StyledHeader>
-      <StyledPanel>
-        Here goes the content for the accordion item 3.
-      </StyledPanel>
-    </StyledItem>
-  </StyledAccordion>
-);
+export default () => {
+  return (
+    <StyledAccordion type="single">
+      <StyledItem value="item-1">
+        <StyledHeader>
+          <StyledTrigger>Trigger text</StyledTrigger>
+        </StyledHeader>
+        <StyledPanel>Panel content</StyledPanel>
+      </StyledItem>
+    </StyledAccordion>
+  );
+};
 ```
 
 ---

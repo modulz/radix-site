@@ -22,6 +22,10 @@ const globalStyles = global({
     fontFamily: '$untitled',
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
+
+    '.dark-theme &': {
+      backgroundColor: '$mauve1',
+    },
   },
 
   svg: {
@@ -71,9 +75,13 @@ function App({ Component, pageProps }: AppProps) {
             top: 0,
             left: 0,
             width: '100%',
-            backgroundColor: '$loContrast',
-            boxShadow: IsNotADocPage ? 'none' : '0 0 0 1px $colors$slate5',
+            boxShadow: IsNotADocPage ? 'none' : '0 0 0 1px $colors$mauve5',
             zIndex: 2,
+            backgroundColor: '$loContrast',
+
+            '.dark-theme &': {
+              backgroundColor: '$mauve1',
+            },
           }}
         >
           <Header />

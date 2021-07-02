@@ -37,6 +37,7 @@ import * as toolbarDemos from './demos/Toolbar';
 import * as tooltipDemos from './demos/Tooltip';
 import { Frontmatter } from 'types/frontmatter';
 import { ColorScale, ColorScaleGroup } from './Scale';
+
 export const components = {
   ColorScale,
   ColorScaleGroup,
@@ -144,12 +145,19 @@ export const components = {
     />
   ),
   pre: ({ children }) => <>{children}</>,
-  code: ({ className, collapsed, ...props }) => {
+  code: ({ className, collapsed, scrollable, showLineNumbers, ...props }) => {
     const isInlineCode = !className;
     return isInlineCode ? (
       <DS.Code {...props} />
     ) : (
-      <DocCodeBlock className={className} collapsed={collapsed !== undefined} {...(props as any)} />
+      <DocCodeBlock
+        variant="violet"
+        showLineNumbers={showLineNumbers}
+        className={className}
+        collapsed={collapsed !== undefined}
+        scrollable={scrollable !== undefined}
+        {...(props as any)}
+      />
     );
   },
   Note: (props) => (
@@ -189,6 +197,7 @@ export const components = {
   ...aspectRatioDemos,
   ...gettingStartedDemos,
   ...accordionDemos,
+  // AccordionHero,
   ...alertDialogDemos,
   ...avatarDemos,
   ...checkboxDemos,

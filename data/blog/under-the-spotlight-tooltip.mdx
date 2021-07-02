@@ -1,0 +1,97 @@
+---
+metaTitle: 'Under the spotlight: Tooltip'
+metaDescription: 'A closer look at the features of the Tooltip component.'
+publishedAt: '2021-05-13'
+author: 'pedro'
+---
+
+A Tooltip component is an overlay containing a brief, and helpful message. It's positioned relatively to interactive trigger element. It appears when the trigger receives keyboard focus or the mouse hovers over it.
+
+It's possible to build a CSS only Tooltip. But chances are, it'll lack essential funcionality.
+
+There are many cases to consider. Such as accessibility concerns, control of delay and collision-aware positioning. Unfortunately, because of this complexity, custom-built Tooltip components aren't up to sctatch.
+
+The Radix Tooltip has been carefully built to ensure you—and your users—have the best possible experience.
+
+---
+
+## A closer look
+
+Our goal is to ensure the Tooltip component is accessible while providing the best possible developer and user experiences.
+
+Below is a list of all the features we've built into our Tooltip, they all work out of the box.
+
+### Screen reader
+
+Our Tooltip component follows the [WAI-ARIA](https://www.w3.org/TR/wai-aria-practices-1.2/#tooltip) authoring specification. This ensures it's accessible to screen reader users.
+
+For example, the Tooltip element has the `role="tooltip"` attribute and the Tooltip trigger references it with `aria-describedby`.
+
+<VideoPlaceholder />
+
+### Keyboard navigation
+
+Keyboard navigation helps users with motor disabilities and blind users rely on keyboard for navigation. It also improves the experience for people without disabilities.
+
+The Radix Tooltip was built to be fully functional without using your mouse.
+
+<KeyboardTable
+  data={[
+    {
+      keys: ['Tab'],
+      description: 'Opens/closes the tooltip without delay.',
+    },
+    {
+      keys: ['Space'],
+      description: 'If open, closes the tooltip without delay.',
+    },
+    {
+      keys: ['Enter'],
+      description: 'If open, closes the tooltip without delay.',
+    },
+    {
+      keys: ['Escape'],
+      description: 'If open, closes the tooltip without delay.',
+    },
+  ]}
+/>
+
+<VideoPlaceholder />
+
+### Configurable delays
+
+The Radix Tooltip uses a built-in state machine to control display delay. This enables you to have full control over the delays, based on different interaction methods.
+
+For example, you can control the delay duration from when the mouse enters the trigger until the tooltip opens. You can even control the skip delay duration, which is how much time a user has to enter another trigger without incurring a delay again.
+
+<VideoPlaceholder />
+
+### Positioning
+
+You can configure the Tooltip so it appears on above or below the trigger, as well as to the left or right of it. You can also choose the alignment of the tooltip against the trigger.
+
+When you open the Tooltip, it'll be positioned relatively to the trigger element. In the unlikely scenario where there's not enough space (a collision), the position will be adjusted.
+
+For example, if you have configured the Tooltip to appear above the trigger, and there's not enough space to fully display the Tooltip, it'll appear below instead.
+
+<VideoPlaceholder />
+
+### Animation
+
+The ability add animation is essential. The Radix Tooltip has been built with animation support in mind. You can animate with CSS or with an animation library, such as Framer Motion.
+
+Our Tooltip component exposes its transform origin via a CSS Custom Property. This enables you to add origin-aware animation in an elegant manner.
+
+<VideoPlaceholder />
+
+### Styling
+
+Radix Tooltips ship with zero styles, so you have full control over the Tooltip's look and feel.
+
+---
+
+## Live demo
+
+One last thing. Here's an interactive, live demo of the Radix Tooltip. Feel free to play around!
+
+<TooltipDemo />

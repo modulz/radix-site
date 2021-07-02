@@ -97,11 +97,12 @@ export const Pre = styled('pre', {
   // Styles for highlighted word
   '.highlight-word': {
     $$bgAndShadow: '$$highlightedWord1Bg',
-    $$xOffset: '1px',
+    $$xOffset: '0px',
     color: '$$highlightedWord1Text',
     backgroundColor: '$$bgAndShadow',
     display: 'inline-block',
     boxShadow: '$$xOffset 0 0 0 $$bgAndShadow, -$$xOffset 0 0 0 $$bgAndShadow',
+    borderRadius: '2px',
 
     // reset the color for tokens inside highlighted words
     '.token': {
@@ -169,6 +170,15 @@ export const Pre = styled('pre', {
   variants: {
     variant: {
       violet: {
+        $$background: '$colors$violet2',
+        $$outline: '0 0 0 1px $colors$violet4',
+        $$syntax2: '$colors$pink11',
+        $$highlightedWord1Bg: '$colors$violet4',
+        $$highlightedWord1Text: '$colors$violet11',
+        $$comment: '$colors$mauve9',
+        $$fadedLines: '$colors$mauveA8',
+      },
+      violetOld: {
         $$background: theme.colors.mauve12.value,
         $$text: theme.colors.gray5.value,
         $$outline: 'none',

@@ -1,0 +1,111 @@
+---
+metaTitle: 'Under the spotlight: Accordion'
+metaDescription: 'A closer look at the features of the Accordion component.'
+publishedAt: '2021-05-06'
+author: 'pedro'
+---
+
+An Accordion component is a list of clickable headings that reveal a section of content.
+
+On the surface, building an Accordion from scratch seems straight-forward. But there are many cases to consider. Such as accessibility concerns, keyboard navigation, animation of dynamic section heights and the ability to expand only one or multiple at a time.
+
+The Radix Accordion has been carefully built to ensure you—and your users—have the best possible experience.
+
+---
+
+## A closer look
+
+Our goal is to ensure the Accordion component is accessible while providing the best possible developer and user experiences.
+
+Below is a list of all the features we've built into our Accordion, they all work out of the box.
+
+### Screen reader
+
+Our Accordion component follows the [WAI-ARIA](https://www.w3.org/TR/wai-aria-practices-1.2/#accordion) authoring specification. This ensures it's accessible to screen reader users.
+
+For example, each Accordion trigger correctly implements the `aria-controls`, `aria-disabled` and `aria-expanded` attributes. While each Accordion content references its trigger with `aria-labelledby`.
+
+<VideoPlaceholder />
+
+### Keyboard navigation
+
+Keyboard navigation helps users with motor disabilities navigate across the items in the Accordion. Blind users rely on keyboard for navigation. It also improves the experience for people without disabilities.
+
+The Radix Accordion was built to be fully functional without using your mouse.
+
+<KeyboardTable
+  data={[
+    {
+      keys: ['Space'],
+      description:
+        'When focus is on an Accordion Button of a collapsed section, expands the section.',
+    },
+    {
+      keys: ['Enter'],
+      description:
+        'When focus is on an Accordion Button of a collapsed section, expands the section.',
+    },
+    {
+      keys: ['Tab'],
+      description: 'Moves focus to the next focusable element.',
+    },
+    {
+      keys: ['Shift + Tab'],
+      description: 'Moves focus to the previous focusable element.',
+    },
+    {
+      keys: ['ArrowDown'],
+      description: 'Moves focus to the next Accordion Button.',
+    },
+    {
+      keys: ['ArrowUp'],
+      description: 'Moves focus to the previous Accordion Button.',
+    },
+    {
+      keys: ['Home'],
+      description:
+        'When focus is on an Accordion Button, moves focus to the first Accordion Button.',
+    },
+    {
+      keys: ['End'],
+      description:
+        'When focus is on an Accordion Button, moves focus to the last Accordion Button.',
+    },
+  ]}
+/>
+
+<VideoPlaceholder />
+
+### Configurable
+
+You can configure the Radix Accordion to your needs. For example, set specific content to be opened by default, allow multiple contents to open, or even prevent a single content from closing.
+
+<VideoPlaceholder />
+
+### Roving focus
+
+The Accordion component implements roving focus (aka roving tabindex) in order to maintain focus state. This provides a more accessible naviation for all types of users.
+
+With roving focus, you can press <Kbd>ArrowLeft</Kbd>/<Kbd>ArrowRight</Kbd> to move focus across the Accordion Buttons. This allows the focus to loop. Pressing <Kbd>Tab</Kbd> will move the focus to the Accordion Panel.
+
+<VideoPlaceholder />
+
+### Animation
+
+The ability to animate certain elements is essential. The Radix Accordion has been built with animation support in mind. You can animate with CSS or with an animation library, such as Framer Motion.
+
+Our Accordion component exposes the height of each panel via a CSS Custom Property. This enables you to have animate dynamic heights without compromises.
+
+<VideoPlaceholder />
+
+### Styling
+
+Radix Accordions ship with zero styles, so you have full control over the its look and feel.
+
+---
+
+## Live demo
+
+One last thing. Here's an interactive, live demo of the Radix Accordion. Feel free to play around!
+
+<AccordionDemo />
